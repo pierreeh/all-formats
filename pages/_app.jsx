@@ -1,10 +1,10 @@
 import Head from "next/head"
-import SessionProvider from 'next-auth/react'
+import { SessionProvider } from "next-auth/react"
 
 import Layout from "components/layout/Layout"
 import { GlobalStyle } from "styles/GlobalStyle.style"
 
-export default function AllFormats({ Component, pageProps: { session, ...pageProps } }) {
+function AllFormats({ Component, pageProps: { session, ...pageProps } }) {
   return (
     <SessionProvider session={session}>
       <Head>
@@ -25,4 +25,6 @@ export default function AllFormats({ Component, pageProps: { session, ...pagePro
     </SessionProvider>
   )
 }
+
+export default AllFormats
 

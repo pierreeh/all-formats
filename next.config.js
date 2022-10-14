@@ -9,7 +9,7 @@ const nextConfig = nextTranslate({
   },
   images: {
     formats: ['image/avif', 'image/webp'],
-    //domains: ['cdn.paris.fr'],
+    domains: ['lh3.googleusercontent.com'],
   },
   experimental: {
     scrollRestoration: true,
