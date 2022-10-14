@@ -1,5 +1,6 @@
 import Head from "next/head"
 
+import Layout from "components/layout/Layout"
 import { GlobalStyle } from "styles/GlobalStyle.style"
 
 export default function AllFormats({ Component, pageProps }) {
@@ -17,7 +18,9 @@ export default function AllFormats({ Component, pageProps }) {
       </Head>
       <GlobalStyle />
       
-      <Component {...pageProps} />
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
     </>
   )
 }

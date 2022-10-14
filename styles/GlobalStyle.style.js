@@ -62,17 +62,22 @@ export const GlobalStyle = createGlobalStyle`
 
 	html {
 		font-family: 'Poppins', sans-serif;
-		color: #000;
+	}
+
+	html,
+	body {
+		height: 100%;
+	}
+
+	#__next {
+		min-height: 100%;
+		display: grid;
+		grid-template-rows: 1fr auto;
 	}
 
 	img {
 		height: auto;
 		max-width: 100%;
 		display: block;
-	}
-
-	.full-bleed {
-		width: 100%;
-		grid-column: 1 / 4;
 	}
 `
