@@ -1,5 +1,7 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {
+const nextTranslate = require('next-translate')
+
+const nextConfig = nextTranslate({
   reactStrictMode: true,
   swcMinify: true,
   compiler: {
@@ -13,6 +15,6 @@ const nextConfig = {
     scrollRestoration: true,
     images: { allowFutureImage: true }
   }
-}
+})
 
 module.exports = nextConfig
