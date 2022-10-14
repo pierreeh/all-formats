@@ -8,6 +8,7 @@ export default function Header() {
   return (
     <header>
       <Link href='/'><a>All Formats</a></Link>
+      <Link href='/auth/signin'><a>Sign In</a></Link>
 
       {router.locales?.map((l) => (
         <button type="button" key={l} onClick={async () => await setLanguage(l)} disabled={l === router.locale}>{l}</button>
