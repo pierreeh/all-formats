@@ -8,7 +8,7 @@ import { AvatarContainer, Avatar } from './Header.style'
 export default function Header() {
   const router = useRouter()
   const { data: session } = useSession()
-  console.log(session)
+
   function UserSession() {
     return (
       !!session ? 
