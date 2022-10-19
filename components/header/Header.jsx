@@ -2,12 +2,14 @@ import { useRouter } from "next/router"
 import Link from "next/link"
 import { signOut, useSession } from 'next-auth/react'
 import setLanguage from 'next-translate/setLanguage'
+import useTranslation from 'next-translate/useTranslation'
 
 import { AvatarContainer, Avatar } from './Header.style'
 
 export default function Header() {
   const router = useRouter()
   const { data: session } = useSession()
+  const { t } = useTranslation('common')
 
   function UserSession() {
     return (
@@ -22,9 +24,9 @@ export default function Header() {
             />
           </AvatarContainer>
           <p>{session.user.name}</p>
-          <button type='button' onClick={() => signOut({ callbackUrl: '/' })}>Logout</button>
+          <button type='button' onClick={() => signOut({ callbackUrl: '/' })}>{t('logOut')}</button>
         </> 
-      : <Link href="/auth/signin"><a>Sign in</a></Link>
+      : <Link href="/auth/signin"><a>{t('signIn')}</a></Link>
     )
   }
 
