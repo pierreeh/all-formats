@@ -19,8 +19,8 @@ export default function Header() {
             <Avatar 
               src={session.user.image}
               alt={session.user.name}
-              sizes="100vw"
               fill
+              sizes="100%"
             />
           </AvatarContainer>
           <p>{session.user.name}</p>

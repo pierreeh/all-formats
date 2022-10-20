@@ -5,6 +5,8 @@ module.exports = {
   pages: {
     '*': ['common'],
     '/': ['home'],
-    '/auth/signin': ['signin']
+    '/auth/signin': ['signin'],
+    '/admin/forum/categories': ['adminCategories'],
+    '/admin/forum/categories/create': ['adminCategories'],
   },
 };

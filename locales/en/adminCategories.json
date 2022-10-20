@@ -1,0 +1,10 @@
+{
+  "createTitle": "Create new category",
+  "createLabel": "Name",
+  "createError": "This field is required",
+  "createDuplicate": "This category already exists",
+  "createEmpty": "Please add a name",
+  "createSubmit": "Create",
+  "createCloseAlert": "Close",
+  "getCreatedAt": "On"
+}

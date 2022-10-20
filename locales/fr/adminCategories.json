@@ -1,0 +1,10 @@
+{
+  "createTitle": "Créer une nouvelle catégorie",
+  "createLabel": "Nom",
+  "createError": "Ce champ est requis",
+  "createDuplicate": "Cette catégorie existe déjà",
+  "createEmpty": "Veuillez indiquer un nom",
+  "createSubmit": "Créer",
+  "createCloseAlert": "Fermer",
+  "getCreatedAt": "Le"
+}
