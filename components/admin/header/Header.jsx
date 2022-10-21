@@ -9,16 +9,16 @@ import { AvatarContainer, Avatar } from './Header.style'
 export default function Header() {
   const router = useRouter()
   const { data: session } = useSession()
-  const { t } = useTranslation('common')
+  const { t } = useTranslation('header')
 
   return (
     <header>
       <Link href='/'><a>All Formats</a></Link>
       <nav>
         <ul>
-          <li><Link href="/admin"><a>Home</a></Link></li>
-          <li><Link href="/admin/forum/categories"><a>Forum</a></Link></li>
-          <li><Link href="/admin/users"><a>Users</a></Link></li>
+          <li><Link href="/admin"><a>{t('adminLinkHome')}</a></Link></li>
+          <li><Link href="/admin/forum/categories"><a>{t('adminLinkForum')}</a></Link></li>
+          <li><Link href="/admin/users"><a>{t('adminLinkUsers')}</a></Link></li>
         </ul>
       </nav>
       <>

@@ -3,7 +3,7 @@ module.exports = {
   defaultLocale: 'en',
   localeDetection: false,
   pages: {
-    '*': ['common'],
+    '*': ['header'],
     '/': ['home'],
     '/auth/signin': ['signin'],
     '/admin/forum/categories': ['adminCategories'],

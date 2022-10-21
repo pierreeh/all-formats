@@ -50,6 +50,7 @@ model User {
   sessions           Session[]
   forumCategories    ForumCategory[]
   forumSubCategories ForumSubCategory[]
+  forumTopics        ForumTopic[]
 }
 
 model VerificationToken {
@@ -82,4 +83,20 @@ model ForumSubCategory {
   userId          String
   forumCategory   ForumCategory @relation(fields: [forumCategoryId], references: [id])
   user            User          @relation(fields: [userId], references: [id])
+  forumTopics     ForumTopic[]
+}
+
+model ForumTopic {
+  id                 String   @id @default(cuid())
+  name               String
+  slug               String
+  message            String   @db.Text
+  isSticky           Boolean  @default(false)
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+  userId             String
+  forumSubCategoryId String
+
+  user             User             @relation(fields: [userId], references: [id])
+  forumSubCategory ForumSubCategory @relation(fields: [forumSubCategoryId], references: [id])
 }

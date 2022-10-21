@@ -9,7 +9,7 @@ import { AvatarContainer, Avatar } from './Header.style'
 export default function Header() {
   const router = useRouter()
   const { data: session } = useSession()
-  const { t } = useTranslation('common')
+  const { t } = useTranslation('header')
 
   function UserSession() {
     return (
@@ -33,8 +33,13 @@ export default function Header() {
   return (
     <header>
       <Link href='/'><a>All Formats</a></Link>
-      <UserSession />
+      <nav>
+        <ul>
+          <li><Link href='/forum'><a>{t('forumLink')}</a></Link></li>
+        </ul>
+      </nav>
 
+      <UserSession />
       {router.locales?.map((l) => (
         <button type="button" key={l} onClick={async () => await setLanguage(l)} disabled={l === router.locale}>{l}</button>
       ))}
