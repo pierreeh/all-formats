@@ -1,0 +1,20 @@
+{
+  "createPageTitle": "Créer une sous catégorie",
+  "createLabelName": "Nom",
+  "createLabelDescription": "Description",
+  "createLabelCategory": "Catégorie",
+  "createSubmit": "Créer",
+  "createRequiredField": "Ce champs est requis",
+  "createDuplicate": "Cette sous catégorie existe déjà",
+  "createEmptyField": "Champs invalides",
+  "createAlertClose": "Fermer",
+  "editPageTitle": "Editer",
+  "editLabelName": "Nom",
+  "editLabelDescription": "Description",
+  "editLabelCategory": "Catégorie",
+  "editSubmit": "Editer",
+  "editRequiredField": "Ce champs est requis",
+  "editDuplicate": "Cette sous catégorie existe déjà",
+  "editEmptyField": "Champs invalides",
+  "editAlertClose": "Fermer"
+}

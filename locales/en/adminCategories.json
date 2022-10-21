@@ -1,5 +1,5 @@
 {
-  "createTitle": "Create new category",
+  "createTitle": "Create a new category",
   "createLabel": "Name",
   "createError": "This field is required",
   "createDuplicate": "This category already exists",
@@ -7,7 +7,8 @@
   "createSubmit": "Create",
   "createCloseAlert": "Close",
   "getTitle": "Categories",
-  "getCreateLink": "Create",
+  "getCreateCatLink": "Create a category",
+  "getCreateSubCatLink": "Create a sub category",
   "getCreatedAt": "On",
   "getAuthor": "by",
   "getEditLink": "Edit",

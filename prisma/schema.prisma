@@ -40,15 +40,16 @@ model Session {
 }
 
 model User {
-  id              String          @id @default(cuid())
-  name            String?
-  email           String?         @unique
-  emailVerified   DateTime?
-  image           String?
-  role            String          @default("USER")
-  accounts        Account[]
-  sessions        Session[]
-  forumCategories ForumCategory[]
+  id                 String             @id @default(cuid())
+  name               String?
+  email              String?            @unique
+  emailVerified      DateTime?
+  image              String?
+  role               String             @default("USER")
+  accounts           Account[]
+  sessions           Session[]
+  forumCategories    ForumCategory[]
+  forumSubCategories ForumSubCategory[]
 }
 
 model VerificationToken {
@@ -60,11 +61,25 @@ model VerificationToken {
 }
 
 model ForumCategory {
-  id        String   @id @default(cuid())
-  name      String
-  slug      String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  userId    String
-  user      User     @relation(fields: [userId], references: [id])
+  id                 String             @id @default(cuid())
+  name               String
+  slug               String
+  createdAt          DateTime           @default(now())
+  updatedAt          DateTime           @updatedAt
+  userId             String
+  user               User               @relation(fields: [userId], references: [id])
+  forumSubCategories ForumSubCategory[]
+}
+
+model ForumSubCategory {
+  id              String        @id @default(cuid())
+  name            String
+  slug            String
+  description     String        @db.Text
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+  forumCategoryId String
+  userId          String
+  forumCategory   ForumCategory @relation(fields: [forumCategoryId], references: [id])
+  user            User          @relation(fields: [userId], references: [id])
 }

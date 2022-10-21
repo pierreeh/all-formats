@@ -1,0 +1,20 @@
+{
+  "createPageTitle": "Create a new sub category",
+  "createLabelName": "Name",
+  "createLabelDescription": "Description",
+  "createLabelCategory": "Category",
+  "createSubmit": "Create",
+  "createRequiredField": "This field is required",
+  "createDuplicate": "This sub category already exists",
+  "createEmptyField": "Invalid fields",
+  "createAlertClose": "Close",
+  "editPageTitle": "Edit",
+  "editLabelName": "Name",
+  "editLabelDescription": "Description",
+  "editLabelCategory": "Category",
+  "editSubmit": "Edit",
+  "editRequiredField": "This field is required",
+  "editDuplicate": "This sub category already exists",
+  "editEmptyField": "Invalid fields",
+  "editAlertClose": "Close"
+}

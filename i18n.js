@@ -9,5 +9,7 @@ module.exports = {
     '/admin/forum/categories': ['adminCategories'],
     '/admin/forum/categories/create': ['adminCategories'], 
     '/admin/forum/categories/[id]': ['adminCategories'],
+    '/admin/forum/sub-categories/create': ['adminSubCategories'], 
+    '/admin/forum/sub-categories/[id]': ['adminSubCategories'],
   },
 };

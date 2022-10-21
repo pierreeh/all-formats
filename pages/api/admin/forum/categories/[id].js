@@ -19,9 +19,6 @@ export default async function ForumPatchCategory(req, res) {
       return res.status(400).json({ message: 'Invalid fields' })
     }
 
-    let unixTimestamp = Date.now()
-    let date = new Date(unixTimestamp)
-
     const forumCategory = await prisma.forumCategory.update({ 
       where: { id: req.query.id }, 
       data: { name, slug, userId: session.user.id, updatedAt: dateFormated } 
