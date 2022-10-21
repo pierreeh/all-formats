@@ -1,3 +1,4 @@
+import { useState } from "react"
 import { useRouter } from "next/router"
 import { useForm } from "react-hook-form"
 import { PrismaClient } from "@prisma/client"
@@ -9,10 +10,16 @@ const prisma = new PrismaClient()
 
 export default function CreateTopic({ category }) {
   const router = useRouter()
+  const [error, setError] = useState({})
   const { register, handleSubmit, reset, formState: { errors } } = useForm()
   
   async function handleCreateTopic(data) {
     try {
+      if (!data.name.replace(/\s/g, '').length || !data.message.replace(/\s/g, '').length) {
+        setError({ type: 'error', message: 'Invalid fields' })
+        return
+      }
+
       const body = JSON.stringify({
         name: data.name.trim(),
         slug: slugify(data.name.trim()),
@@ -41,6 +48,22 @@ export default function CreateTopic({ category }) {
       <h1>Create a new topic</h1>
 
       <form onSubmit={handleSubmit(handleCreateTopic)}>
+        {!!error.type &&
+          <div>
+            <p>{error.message}</p>
+            <button 
+              type="button"
+              onClick={() => {
+                reset()
+                setError({})
+              }
+              }
+            >
+              Close
+            </button>
+          </div>
+        }
+
         <div>
           <label htmlFor="name">Name</label>
           <input {...register('name', { required: true })} type="text" />
