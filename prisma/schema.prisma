@@ -36,7 +36,8 @@ model Session {
   sessionToken String   @unique
   userId       String
   expires      DateTime
-  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model User {
@@ -51,6 +52,7 @@ model User {
   forumCategories    ForumCategory[]
   forumSubCategories ForumSubCategory[]
   forumTopics        ForumTopic[]
+  ForumComment       ForumComment[]
 }
 
 model VerificationToken {
@@ -62,28 +64,30 @@ model VerificationToken {
 }
 
 model ForumCategory {
-  id                 String             @id @default(cuid())
-  name               String
-  slug               String
-  createdAt          DateTime           @default(now())
-  updatedAt          DateTime           @updatedAt
-  userId             String
+  id        String   @id @default(cuid())
+  name      String
+  slug      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  userId    String
+
   user               User               @relation(fields: [userId], references: [id])
   forumSubCategories ForumSubCategory[]
 }
 
 model ForumSubCategory {
-  id              String        @id @default(cuid())
+  id              String   @id @default(cuid())
   name            String
   slug            String
-  description     String        @db.Text
-  createdAt       DateTime      @default(now())
-  updatedAt       DateTime      @updatedAt
+  description     String   @db.Text
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
   forumCategoryId String
   userId          String
-  forumCategory   ForumCategory @relation(fields: [forumCategoryId], references: [id])
-  user            User          @relation(fields: [userId], references: [id])
-  forumTopics     ForumTopic[]
+
+  forumCategory ForumCategory @relation(fields: [forumCategoryId], references: [id])
+  user          User          @relation(fields: [userId], references: [id])
+  forumTopics   ForumTopic[]
 }
 
 model ForumTopic {
@@ -99,4 +103,17 @@ model ForumTopic {
 
   user             User             @relation(fields: [userId], references: [id])
   forumSubCategory ForumSubCategory @relation(fields: [forumSubCategoryId], references: [id])
+  ForumComment     ForumComment[]
+}
+
+model ForumComment {
+  id           String   @id @default(cuid())
+  message      String   @db.Text
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  userId       String
+  forumTopicId String
+
+  user       User       @relation(fields: [userId], references: [id])
+  forumTopic ForumTopic @relation(fields: [forumTopicId], references: [id])
 }

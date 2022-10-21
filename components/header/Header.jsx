@@ -4,7 +4,7 @@ import { signOut, useSession } from 'next-auth/react'
 import setLanguage from 'next-translate/setLanguage'
 import useTranslation from 'next-translate/useTranslation'
 
-import { AvatarContainer, Avatar } from './Header.style'
+import Avatar from "components/commons/avatar/Avatar"
 
 export default function Header() {
   const router = useRouter()
@@ -15,14 +15,12 @@ export default function Header() {
     return (
       !!session ? 
         <>
-          <AvatarContainer>  
-            <Avatar 
-              src={session.user.image}
-              alt={session.user.name}
-              fill
-              sizes="100%"
-            />
-          </AvatarContainer>
+          <Avatar 
+            src={session.user.image}
+            alt={session.user.name}
+            fill
+            sizes="100%"
+          />
           <p>{session.user.name}</p>
           <button type='button' onClick={() => signOut({ callbackUrl: '/' })}>{t('logOut')}</button>
         </> 

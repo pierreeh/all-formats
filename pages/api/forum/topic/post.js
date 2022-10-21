@@ -13,7 +13,7 @@ export default async function post(req, res) {
   try {
     const { name, slug, message, forumSubCategoryId } = req.body
 
-    if (!name || !name.replace(/\s/g, '').length || !message) {
+    if (!name || !name.replace(/\s/g, '').length || !message || !message.replace(/\s/g, '').length) {
       return res.status(400).json({ message: 'Invalid fields' })
     }
 

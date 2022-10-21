@@ -1,4 +1,5 @@
 import { useState } from "react"
+import Link from "next/link"
 import { useRouter } from "next/router"
 import { useForm } from "react-hook-form"
 import { PrismaClient } from "@prisma/client"
@@ -9,6 +10,7 @@ import { jsonify } from "utils/utils"
 const prisma = new PrismaClient()
 
 export default function CreateTopic({ category }) {
+  console.log(category)
   const router = useRouter()
   const [error, setError] = useState({})
   const { register, handleSubmit, reset, formState: { errors } } = useForm()
@@ -45,6 +47,15 @@ export default function CreateTopic({ category }) {
 
   return (
     <section>
+      <aside>
+        <ul>
+          <li><Link href='/'><a>Home</a></Link></li>
+          <li><Link href='/forum'><a>Forum</a></Link></li>
+          <li><Link href={`/forum/${category.slug}/${category.id}`}><a>{category.name}</a></Link></li>
+          <li>Create a new topic</li>
+        </ul>
+      </aside>
+
       <h1>Create a new topic</h1>
 
       <form onSubmit={handleSubmit(handleCreateTopic)}>
