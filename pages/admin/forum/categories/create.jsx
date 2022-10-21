@@ -5,6 +5,7 @@ import useTranslation from 'next-translate/useTranslation'
 import { PrismaClient } from "@prisma/client"
 
 import slugify from "utils/slugify"
+import { jsonify } from "utils/utils"
 
 const prisma = new PrismaClient()
 
@@ -92,7 +93,7 @@ export async function getServerSideProps() {
 
     return {
       props: {
-        forumCategories: JSON.parse(JSON.stringify(forumCategories))
+        forumCategories: jsonify(forumCategories)
       }
     }
   } catch (e) {

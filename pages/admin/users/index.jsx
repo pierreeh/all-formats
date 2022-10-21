@@ -2,6 +2,8 @@ import { useRouter } from "next/router"
 import { PrismaClient } from "@prisma/client"
 import { useForm } from "react-hook-form"
 
+import { jsonify } from "utils/utils"
+
 const prisma = new PrismaClient()
 
 export default function Users({ users }) {
@@ -68,7 +70,7 @@ export async function getServerSideProps() {
 
     return {
       props: { 
-        users: JSON.parse(JSON.stringify(users))
+        users: jsonify(users)
       }
     }
   } catch (e) {

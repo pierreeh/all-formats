@@ -6,5 +6,16 @@
   "createEmpty": "Veuillez indiquer un nom",
   "createSubmit": "Créer",
   "createCloseAlert": "Fermer",
-  "getCreatedAt": "Le"
+  "getTitle": "Catégories",
+  "getCreateLink": "Créer",
+  "getCreatedAt": "Le",
+  "getAuthor": "par",
+  "getEditLink": "Editer",
+  "editName": "Editer",
+  "editLabel": "Nom",
+  "editSubmit": "Editer",
+  "editCloseAlert": "Fermer",
+  "editError": "Ce champ est requis",
+  "editDuplicate": "Cette catégorie existe déjà",
+  "editEmpty": "Veuillez indiquer un nom"
 }

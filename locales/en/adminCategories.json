@@ -6,5 +6,16 @@
   "createEmpty": "Please add a name",
   "createSubmit": "Create",
   "createCloseAlert": "Close",
-  "getCreatedAt": "On"
+  "getTitle": "Categories",
+  "getCreateLink": "Create",
+  "getCreatedAt": "On",
+  "getAuthor": "by",
+  "getEditLink": "Edit",
+  "editName": "Edit",
+  "editLabel": "Name",
+  "editSubmit": "Edit",
+  "editCloseAlert": "Close",
+  "editError": "This field is required",
+  "editDuplicate": "This category already exists",
+  "editEmpty": "Please add a name"
 }

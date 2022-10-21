@@ -7,6 +7,7 @@ module.exports = {
     '/': ['home'],
     '/auth/signin': ['signin'],
     '/admin/forum/categories': ['adminCategories'],
-    '/admin/forum/categories/create': ['adminCategories'],
+    '/admin/forum/categories/create': ['adminCategories'], 
+    '/admin/forum/categories/[id]': ['adminCategories'],
   },
 };
