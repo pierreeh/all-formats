@@ -9,7 +9,7 @@ const prisma = new PrismaClient()
 export default function Users({ users }) {
   const router = useRouter()
   const { register, handleSubmit, formState: { errors } } = useForm({
-    defaultValues: { role: users.role },
+    defaultValues: { role: users.map(u => u.role) },
     mode: "onChange",
   })
   
