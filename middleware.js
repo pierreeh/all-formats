@@ -9,13 +9,18 @@ export async function middleware(req) {
   }
 
   const session = await getToken({ req, secret: secretKey })
-  if (session?.role !== 'ADMIN') {
+
+  if (!session?.role && (req.nextUrl.pathname.startsWith('/api/forum') || req.nextUrl.pathname.endsWith('/create'))) {
+    return NextResponse.rewrite(`${process.env.NEXT_PUBLIC_BASEURL}/404`)
+  }
+
+  if (session?.role !== 'ADMIN' && (req.nextUrl.pathname.startsWith('/admin') || req.nextUrl.pathname.startsWith('/api/admin'))) {
     return NextResponse.rewrite(`${process.env.NEXT_PUBLIC_BASEURL}/404`)
   }
 
   return NextResponse.next()
 }
 
-export const config = {
-  matcher: ['/admin/:path*', '/api/admin/:path*'],
-}
+// export const config = {
+//   matcher: ['/admin/:path*', '/api/admin/:path*'],
+// }

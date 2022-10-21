@@ -6,7 +6,6 @@ import { jsonify } from "utils/utils"
 const prisma = new PrismaClient()
 
 export default function Forum({ forumCategories }) {
-  console.log(forumCategories)
   return (
     <section>
       <aside>
