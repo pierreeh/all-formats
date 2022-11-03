@@ -8,7 +8,7 @@ import Footer from "components/footer/Footer"
 
 const AdminHeader = dynamic(() => import("components/admin/header/Header"), { suspense: true })
 
-function RoleHeader() {
+function MainHeader() {
   const router = useRouter() 
   const { data: session } = useSession()
 
@@ -25,7 +25,7 @@ export default function Layout({ children }) {
   return (
     <>
       <div>
-        <RoleHeader />
+        <MainHeader />
         <main>{children}</main>
       </div>
       

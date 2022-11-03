@@ -1,5 +1,7 @@
 import { createGlobalStyle } from 'styled-components'
 
+import { primaryColors } from 'components/commons/Theme'
+
 export function rem(pixel) {
 	return `${pixel / 16}rem`
 }
@@ -62,6 +64,7 @@ export const GlobalStyle = createGlobalStyle`
 
 	html {
 		font-family: 'Poppins', sans-serif;
+		color: ${primaryColors.primaryText};
 	}
 
 	html,

@@ -3,6 +3,7 @@ import { useSession } from 'next-auth/react'
 import { PrismaClient } from "@prisma/client"
 import dayjs from 'dayjs'
 
+import Breadcrumb from 'components/commons/breadcrumb/Breadcrumb'
 import { jsonify } from 'utils/utils'
 import slugify from 'utils/slugify'
 
@@ -13,13 +14,10 @@ export default function Category({ category }) {
 
   return (
     <section>
-      <aside>
-        <ul>
-          <li><Link href='/'><a>Home</a></Link></li>
-          <li><Link href='/forum'><a>Forum</a></Link></li>
-          <li>{category.name}</li>
-        </ul>
-      </aside>
+      <Breadcrumb
+        links={[{ href: '/', name: 'Home' }, { href: '/forum', name: 'Forum' }]}
+        currentPage={category.name}
+      />
 
       <h1>{category.name}</h1>
       {!!session && <Link href={`/forum/${category.slug}/create`}><a>Create a new topic</a></Link>}

@@ -4,6 +4,7 @@ import { useRouter } from "next/router"
 import { useForm } from "react-hook-form"
 import { PrismaClient } from "@prisma/client"
 
+import Breadcrumb from "components/commons/breadcrumb/Breadcrumb"
 import slugify from "utils/slugify"
 import { jsonify } from "utils/utils"
 
@@ -46,14 +47,10 @@ export default function CreateTopic({ category }) {
 
   return (
     <section>
-      <aside>
-        <ul>
-          <li><Link href='/'><a>Home</a></Link></li>
-          <li><Link href='/forum'><a>Forum</a></Link></li>
-          <li><Link href={`/forum/${category.slug}/${category.id}`}><a>{category.name}</a></Link></li>
-          <li>Create a new topic</li>
-        </ul>
-      </aside>
+      <Breadcrumb 
+        links={[{ href: '/', name: 'Home' }, { href: '/forum', name: 'Forum' }, { href: `/forum/${category.slug}/${category.id}`, name: category.name }]}
+        currentPage='Create a new topic'
+      />
 
       <h1>Create a new topic</h1>
 

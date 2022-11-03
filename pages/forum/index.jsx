@@ -1,6 +1,7 @@
 import Link from "next/link"
 import { PrismaClient } from "@prisma/client"
 
+import Breadcrumb from "components/commons/breadcrumb/Breadcrumb"
 import { jsonify } from "utils/utils"
 
 const prisma = new PrismaClient()
@@ -8,12 +9,10 @@ const prisma = new PrismaClient()
 export default function Forum({ forumCategories }) {
   return (
     <section>
-      <aside>
-        <ul>
-          <li><Link href='/'><a>Home</a></Link></li>
-          <li>Forum</li>
-        </ul>
-      </aside>
+      <Breadcrumb 
+        links={[{ href: '/', name: 'Home' }]}
+        currentPage='Forum'
+      />
 
       <article>
         <ul>

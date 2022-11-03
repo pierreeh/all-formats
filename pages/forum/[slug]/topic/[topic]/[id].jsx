@@ -6,6 +6,7 @@ import dayjs from 'dayjs'
 import { useState } from "react"
 import { useForm } from "react-hook-form"
 
+import Breadcrumb from "components/commons/breadcrumb/Breadcrumb"
 import { jsonify } from "utils/utils"
 import slugify from "utils/slugify"
 
@@ -47,14 +48,10 @@ export default function Topic({ forumTopic, forumMessages }) {
 
   return (
     <section>
-      <aside>
-        <ul>
-          <li><Link href='/'><a>Home</a></Link></li>
-          <li><Link href='/forum'><a>Forum</a></Link></li>
-          <li><Link href={`/forum/${forumTopic.forumSubCategory.slug}/${forumTopic.forumSubCategory.id}`}><a>{forumTopic.forumSubCategory.name}</a></Link></li>
-          <li>{forumTopic.name}</li>
-        </ul>
-      </aside>
+      <Breadcrumb
+        links={[{ href: '/', name: 'Home' }, { href: '/forum', name: 'Forum' }, { href: `/forum/${forumTopic.forumSubCategory.slug}/${forumTopic.forumSubCategory.id}`, name: forumTopic.forumSubCategory.name }]}
+        currentPage={forumTopic.name}
+      />
 
       <article>
         <h1>{forumTopic.name}</h1>
