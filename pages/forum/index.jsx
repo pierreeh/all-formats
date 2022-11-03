@@ -1,8 +1,14 @@
-import Link from "next/link"
 import { PrismaClient } from "@prisma/client"
+import dayjs from 'dayjs'
 
 import Breadcrumb from "components/commons/breadcrumb/Breadcrumb"
+import Title from "components/commons/title/Title"
+import Links from "components/commons/links/Links"
+import Text from "components/commons/text/Text"
 import { jsonify } from "utils/utils"
+import { rem } from "styles/GlobalStyle.style"
+import { IndexCategories, IndexSubCategories, IndexDescriptions } from 'styles/Forum.style'
+import slugify from "utils/slugify"
 
 const prisma = new PrismaClient()
 
@@ -17,18 +23,31 @@ export default function Forum({ forumCategories }) {
       <article>
         <ul>
           {forumCategories.map(f => (
-            <li key={f.id} style={{ marginTop: "3rem" }}>
-              <h1>{f.name}</h1>
+            <IndexCategories key={f.id}>
+              <Title as='h1' textSize={rem(32)} margins={`0 0 ${rem(24)}`}>{f.name}</Title>
+              <IndexDescriptions>
+                <Text textSize={rem(12)} textUppercase>Forums</Text>
+                <Text textSize={rem(12)} textUppercase alignText='center'>Topics</Text>
+                <Text textSize={rem(12)} textUppercase>Last contribution</Text>
+              </IndexDescriptions>
               <ul>
                 {f.forumSubCategories.map(s => (
-                  <li key={s.id}>
-                    <Link href={`/forum/${s.slug}/${s.id}`}><a>{s.name}</a></Link>
-                    <p>{s.description}</p>
-                    <p>{s.forumTopics.length}</p>
-                  </li>
+                  <IndexSubCategories key={s.id}>
+                    <div>
+                      <Links href={`/forum/${s.slug}/${s.id}`} margins={`0 0 ${rem(8)}`}>{s.name}</Links>
+                      <p>{s.description}</p>
+                    </div>
+                    <Text alignText='center'>{s.forumTopics.length}</Text>
+                    {!!s.forumTopics.length &&
+                      <div>
+                        <Links href={`/forum/${s.slug}/topic/${s.forumTopics[0].slug}/${s.forumTopics[0].id}`}>{s.forumTopics[0].name}</Links>
+                        <Text textSize={rem(12)}>By <Links href={`/user/${slugify(s.forumTopics[0].user.name)}`}>{s.forumTopics[0].user.name}</Links>, {dayjs(s.forumTopics[0].createdAt).format('DD/MM/YYYY')}</Text>
+                      </div>
+                    }
+                  </IndexSubCategories>
                 ))}
               </ul>
-            </li>
+            </IndexCategories>
           ))}
         </ul>
       </article>
@@ -42,7 +61,14 @@ export async function getServerSideProps() {
       include: {
         forumSubCategories: {
           include: {
-            forumTopics: true,
+            forumTopics: {
+              orderBy: {
+                createdAt: 'desc',
+              },
+              include: {
+                user: true
+              }
+            },
           }
         },
       },
@@ -50,7 +76,7 @@ export async function getServerSideProps() {
 
     return {
       props: {
-        forumCategories: jsonify(forumCategories)
+        forumCategories: jsonify(forumCategories),
       }
     }
   } catch (e) {

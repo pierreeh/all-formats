@@ -15,3 +15,7 @@ export const primaryColors = {
   primaryText: "rgb(1, 15, 13)",
   primary: "rgba(21, 126, 191)", // Blue
 }
+
+export const primaryColorsAlpha = {
+  primaryText16: "rgba(1, 15, 13, .16)"
+}

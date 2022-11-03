@@ -43,6 +43,9 @@ export async function getServerSideProps(context) {
     const category = await prisma.forumSubCategory.findUnique({
       include: {
         forumTopics: {
+          orderBy: {
+            createdAt: 'desc'
+          },
           include: {
             user: true,
           }
