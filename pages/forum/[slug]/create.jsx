@@ -10,7 +10,6 @@ import { jsonify } from "utils/utils"
 const prisma = new PrismaClient()
 
 export default function CreateTopic({ category }) {
-  console.log(category)
   const router = useRouter()
   const [error, setError] = useState({})
   const { register, handleSubmit, reset, formState: { errors } } = useForm()
