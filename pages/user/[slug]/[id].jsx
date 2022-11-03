@@ -25,7 +25,7 @@ export async function getServerSideProps(context) {
     const { query, req } = context
     const session = await getSession({ req })
     
-    if (session.id === query.id) {
+    if (session.user.id === query.id) {
       return {
         redirect: {
           permanent: true,
