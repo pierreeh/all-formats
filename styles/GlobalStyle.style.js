@@ -83,4 +83,14 @@ export const GlobalStyle = createGlobalStyle`
 		max-width: 100%;
 		display: block;
 	}
+
+	.full-bleed {
+		width: 100%;
+		grid-column: 1 / 4;
+	}
+
+	// full bleed block
+	/* blockquote {
+		width: min(80%, 43.75rem);
+	} */
 `

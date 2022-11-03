@@ -5,6 +5,7 @@ import { useSession } from "next-auth/react"
 
 import Header from "components/header/Header"
 import Footer from "components/footer/Footer"
+import { SiteContainer } from './Layout.style'
 
 const AdminHeader = dynamic(() => import("components/admin/header/Header"), { suspense: true })
 
@@ -26,7 +27,7 @@ export default function Layout({ children }) {
     <>
       <div>
         <MainHeader />
-        <main>{children}</main>
+        <SiteContainer>{children}</SiteContainer>
       </div>
       
       <Footer />
