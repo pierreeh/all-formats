@@ -1,12 +1,15 @@
 import { useState } from "react"
-import Link from "next/link"
 import { useRouter } from "next/router"
 import { useForm } from "react-hook-form"
 import { PrismaClient } from "@prisma/client"
 
 import Breadcrumb from "components/commons/breadcrumb/Breadcrumb"
+import Title from "components/commons/title/Title"
+import Notif from "components/commons/notif/Notif"
+import Label from "components/commons/form/label/Label"
 import slugify from "utils/slugify"
 import { jsonify } from "utils/utils"
+import { rem } from "styles/GlobalStyle.style"
 
 const prisma = new PrismaClient()
 
@@ -52,34 +55,31 @@ export default function CreateTopic({ category }) {
         currentPage='Create a new topic'
       />
 
-      <h1>Create a new topic</h1>
+      <Title as='h1' textSize={rem(32)} margins={`0 0 ${rem(4)}`}>Create a new topic</Title>
 
       <form onSubmit={handleSubmit(handleCreateTopic)}>
         {!!error.type &&
-          <div>
+          <Notif
+            notifType={error.type}
+            onClick={() => {
+              reset()
+              setError({})
+            }}
+            margins={`${rem(24)} 0`}
+          >
             <p>{error.message}</p>
-            <button 
-              type="button"
-              onClick={() => {
-                reset()
-                setError({})
-              }
-              }
-            >
-              Close
-            </button>
-          </div>
+          </Notif>
         }
 
-        <div>
-          <label htmlFor="name">Name</label>
-          <input {...register('name', { required: true })} type="text" />
+        <Label htmlFor="name" errors={errors.name}>
+          Name
+          <input {...register('name', { required: true })} id="name" />
           {errors.name && <span>This field is required</span>}
-        </div>
+        </Label>
 
         <div>
           <label htmlFor="message">Message</label>
-          <textarea {...register('message', { required: true })} />
+          <textarea {...register('message', { required: true })} id="message" error={errors.message} />
           {errors.message && <span>This field is required</span>}
         </div>
 
