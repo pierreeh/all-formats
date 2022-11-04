@@ -12,7 +12,7 @@ import slugify from "utils/slugify"
 
 const prisma = new PrismaClient()
 
-export default function Topic({ forumTopic, forumMessages }) {
+export default function Topic({ forumTopic }) {
   const { data: session } = useSession()
   const [error, setError] = useState({})
   const { register, handleSubmit, reset, formState: { errors } } = useForm()
@@ -58,22 +58,20 @@ export default function Topic({ forumTopic, forumMessages }) {
         <p>By <Link href={`/user/${slugify(forumTopic.user.name)}/${forumTopic.user.id}`}><a>{forumTopic.user.name}</a></Link>, {dayjs(forumTopic.createdAt).format('DD/MM/YYYY')}</p>
         <p>{forumTopic.message}</p>
         <hr />
-      </article>
-
-      {!!forumMessages ?
-        <ul>
-          {forumMessages.map(m => (
-            <li key={m.id}>
+        {forumTopic.forumComments &&
+          <ul>
+            {forumTopic.forumComments.map(f => (
+              <li key={f.id}>
               <article>
-                <p>By <Link href={`/user/${slugify(m.user.name)}/${m.user.id}`}><a>{m.user.name}</a></Link>, {dayjs(m.createdAt).format('DD/MM/YYYY')}</p>
-                <p>{m.message}</p>
+                <p>By <Link href={`/user/${slugify(f.user.name)}/${f.user.id}`}><a>{f.user.name}</a></Link>, {dayjs(f.createdAt).format('DD/MM/YYYY')}</p>
+                <p>{f.message}</p>
                 <hr />
               </article>
             </li>
-          ))}
-        </ul>
-        : <p>Be the first to comment</p>
-      }
+            ))}
+          </ul>
+        }
+      </article>
 
       {!!session &&
         <form onSubmit={handleSubmit(handleCreateComment)}>
@@ -114,23 +112,21 @@ export async function getServerSideProps(context) {
       where: { id: query.id },
       include: {
         forumSubCategory: true,
-        user: true
-      }
-    })
-
-    const forumMessages = await prisma.forumComment.findMany({
-      where: { forumTopicId: {
-        contains: query.id
-      } },
-      include: {
-        user: true
+        user: true,
+        forumComments: {
+          orderBy: {
+            createdAt: 'desc'
+          },
+          include: {
+            user: true
+          }
+        },
       }
     })
 
     return {
       props: {
         forumTopic: jsonify(forumTopic),
-        forumMessages: jsonify(forumMessages)
       }
     }
   } catch (e) {

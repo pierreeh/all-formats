@@ -21,12 +21,18 @@ export const IndexCategories = styled.li`
 
 export const IndexDescriptions = styled.div`
   display: grid;
-  grid-template-columns: 5fr 1fr 2fr;
+  grid-template-columns: 9fr 1fr 2fr;
   margin-bottom: ${rem(16)};
 `
 
 export const IndexSubCategories = styled.li`
   display: grid;
-  grid-template-columns: 5fr 1fr 2fr;
+  grid-template-columns: 9fr 1fr 2fr;
   margin-bottom: ${rem(24)};
+`
+
+export const SubCategoryHeader = styled.header`
+  display: flex;
+  justify-content: space-between;
+  margin: ${rem(32)} 0;
 `

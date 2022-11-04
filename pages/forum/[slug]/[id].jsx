@@ -4,14 +4,21 @@ import { PrismaClient } from "@prisma/client"
 import dayjs from 'dayjs'
 
 import Breadcrumb from 'components/commons/breadcrumb/Breadcrumb'
+import Title from 'components/commons/title/Title'
+import ButtonLink from 'components/commons/buttonLink/ButtonLink'
+import Links from "components/commons/links/Links"
+import Text from 'components/commons/text/Text'
+import { SubCategoryHeader, IndexDescriptions, IndexSubCategories } from 'styles/Forum.style'
 import { jsonify } from 'utils/utils'
 import slugify from 'utils/slugify'
+import { rem } from 'styles/GlobalStyle.style'
+import { primaryColorsAlpha } from 'components/commons/Theme'
 
 const prisma = new PrismaClient()
 
 export default function Category({ category }) {
   const { data: session } = useSession()
-
+  
   return (
     <section>
       <Breadcrumb
@@ -19,16 +26,30 @@ export default function Category({ category }) {
         currentPage={category.name}
       />
 
-      <h1>{category.name}</h1>
-      {!!session && <Link href={`/forum/${category.slug}/create`}><a>Create a new topic</a></Link>}
-
+      <SubCategoryHeader>
+        <Title as='h1' textSize={rem(32)} margins={`0 0 ${rem(4)}`}>{category.name}</Title>
+        {!!session && <ButtonLink href={`/forum/${category.slug}/create`}>New topic</ButtonLink>}
+      </SubCategoryHeader>
+      
       <article>
+        <IndexDescriptions>
+          <Text textSize={rem(12)} textUppercase>Topics</Text>
+          <Text textSize={rem(12)} textUppercase alignText='center'>Answers</Text>
+          <Text textSize={rem(12)} textUppercase>Last contribution</Text>
+        </IndexDescriptions>
         <ul>
           {category.forumTopics.map(f => (
-            <li key={f.id}>
-              <Link href={`/forum/${category.slug}/topic/${f.slug}/${f.id}`}><a>{f.name}</a></Link>
-              <p>by <Link href={`/user/${slugify(f.user.name)}/${f.user.id}`}><a>{f.user.name}</a></Link>, {dayjs(f.createdAt).format('DD/MM/YYYY')}</p>
-            </li>
+            <IndexSubCategories key={f.id}>
+              <div>
+                <Links href={`/forum/${category.slug}/topic/${f.slug}/${f.id}`}>{f.name}</Links>
+                <Text textSize={rem(12)} textColor={primaryColorsAlpha.primaryText64}>by <Links href={`/user/${slugify(f.user.name)}/${f.user.id}`}>{f.user.name}</Links>, {dayjs(f.createdAt).format('DD/MM/YYYY')}</Text>
+              </div>
+
+              <Text alignText='center'>{f.forumComments.length}</Text>
+              {!!f.forumComments &&
+                <Text textSize={rem(12)} textColor={primaryColorsAlpha.primaryText64}><Links href={`/user/${slugify(f.forumComments[0].user.name)}/${f.forumComments[0].user.id}`}>{f.forumComments[0].user.name}</Links>, {dayjs(f.forumComments[0].createdAt).format('DD/MM/YYYY')}</Text>
+              }
+            </IndexSubCategories>
           ))}
         </ul>
       </article>
@@ -48,14 +69,23 @@ export async function getServerSideProps(context) {
           },
           include: {
             user: true,
+            forumComments: {
+              orderBy: {
+                createdAt: 'desc'
+              },
+              include: {
+                user: true
+              }
+            }
           }
-        },
+        }
       },
       where: { id: query.id }
     })
+
     return {
       props: {
-        category: jsonify(category)
+        category: jsonify(category),
       }
     }
   } catch (e) {

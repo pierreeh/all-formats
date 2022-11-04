@@ -103,7 +103,7 @@ model ForumTopic {
 
   user             User             @relation(fields: [userId], references: [id])
   forumSubCategory ForumSubCategory @relation(fields: [forumSubCategoryId], references: [id])
-  ForumComment     ForumComment[]
+  forumComments    ForumComment[]
 }
 
 model ForumComment {
@@ -114,6 +114,6 @@ model ForumComment {
   userId       String
   forumTopicId String
 
-  user       User       @relation(fields: [userId], references: [id])
-  forumTopic ForumTopic @relation(fields: [forumTopicId], references: [id])
+  user        User       @relation(fields: [userId], references: [id])
+  forumTopics ForumTopic @relation(fields: [forumTopicId], references: [id])
 }

@@ -9,6 +9,7 @@ import { jsonify } from "utils/utils"
 import { rem } from "styles/GlobalStyle.style"
 import { IndexCategories, IndexSubCategories, IndexDescriptions } from 'styles/Forum.style'
 import slugify from "utils/slugify"
+import { primaryColorsAlpha } from "components/commons/Theme"
 
 const prisma = new PrismaClient()
 
@@ -24,7 +25,7 @@ export default function Forum({ forumCategories }) {
         <ul>
           {forumCategories.map(f => (
             <IndexCategories key={f.id}>
-              <Title as='h1' textSize={rem(32)} margins={`0 0 ${rem(24)}`}>{f.name}</Title>
+              <Title as='h1' textSize={rem(32)} margins={`0 0 ${rem(4)}`}>{f.name}</Title>
               <IndexDescriptions>
                 <Text textSize={rem(12)} textUppercase>Forums</Text>
                 <Text textSize={rem(12)} textUppercase alignText='center'>Topics</Text>
@@ -35,13 +36,13 @@ export default function Forum({ forumCategories }) {
                   <IndexSubCategories key={s.id}>
                     <div>
                       <Links href={`/forum/${s.slug}/${s.id}`} margins={`0 0 ${rem(8)}`}>{s.name}</Links>
-                      <p>{s.description}</p>
+                      <Text textColor={primaryColorsAlpha.primaryText64}>{s.description}</Text>
                     </div>
                     <Text alignText='center'>{s.forumTopics.length}</Text>
                     {!!s.forumTopics.length &&
                       <div>
                         <Links href={`/forum/${s.slug}/topic/${s.forumTopics[0].slug}/${s.forumTopics[0].id}`}>{s.forumTopics[0].name}</Links>
-                        <Text textSize={rem(12)}>By <Links href={`/user/${slugify(s.forumTopics[0].user.name)}`}>{s.forumTopics[0].user.name}</Links>, {dayjs(s.forumTopics[0].createdAt).format('DD/MM/YYYY')}</Text>
+                        <Text textSize={rem(12)} textColor={primaryColorsAlpha.primaryText64}>By <Links href={`/user/${slugify(s.forumTopics[0].user.name)}/${s.forumTopics[0].user.id}`}>{s.forumTopics[0].user.name}</Links>, {dayjs(s.forumTopics[0].createdAt).format('DD/MM/YYYY')}</Text>
                       </div>
                     }
                   </IndexSubCategories>
